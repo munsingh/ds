@@ -5,3 +5,7 @@
 *.suo
 *.db
 *.opendb
+/ds/ds.vcxproj.user
+/.vs/ds/v15/ipch/AutoPCH/2a39667c6774e3f5
+/intermediate/windows/vs/v141/x64/Debug/ds
+*.user

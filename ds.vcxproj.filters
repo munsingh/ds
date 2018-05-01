@@ -22,4 +22,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="appveyor.yml">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

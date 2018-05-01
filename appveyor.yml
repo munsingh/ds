@@ -1,0 +1,15 @@
+version: {major}.{minor}.{build}
+branches:
+  only:
+  - master
+image: Visual Studio 2017
+configuration:
+- Debug
+- Release
+platform:
+- Win32
+- x64
+build:
+  project: ds.sln
+  parallel: true
+  verbosity: minimal

@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{92E2254A-5FA8-4985-89E5-260BAD0CA9F3}</ProjectGuid>
+    <RootNamespace>dsUT</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>./../output/windows/vs/$(PlatformToolset)/$(Platform)/$(Configuration)/</OutDir>
+    <IntDir>./../intermediate/windows/vs/$(PlatformToolset)/$(Platform)/$(Configuration)/$(ProjectName)/</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>./../output/windows/vs/$(PlatformToolset)/$(Platform)/$(Configuration)/</OutDir>
+    <IntDir>./../intermediate/windows/vs/$(PlatformToolset)/$(Platform)/$(Configuration)/$(ProjectName)/</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>./../output/windows/vs/$(PlatformToolset)/$(Platform)/$(Configuration)/</OutDir>
+    <IntDir>./../intermediate/windows/vs/$(PlatformToolset)/$(Platform)/$(Configuration)/$(ProjectName)/</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>./../output/windows/vs/$(PlatformToolset)/$(Platform)/$(Configuration)/</OutDir>
+    <IntDir>./../intermediate/windows/vs/$(PlatformToolset)/$(Platform)/$(Configuration)/$(ProjectName)/</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>./../inc;./../thirdParty/googletest</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <PreBuildEvent>
+      <Command>@echo off
+
+set GOOGLE_TEST_VERSION=1.8.0.14
+set THIRDPARTY=.\..\thirdParty
+set WGET=%THIRDPARTY%\wget.exe
+set SEVENZ=%THIRDPARTY%\7za.exe
+
+set GOOGLE_TEST_FILENAME=%THIRDPARTY%\googletest\windows\vs\$(PlatformToolset)\$(Platform)\$(Configuration)\gtest.lib
+set Filename=googletest_binaries_$(Configuration)_$(Platform)-%GOOGLE_TEST_VERSION%.zip
+set URL=https://github.com/munsingh/googletest/releases/download/release-%GOOGLE_TEST_VERSION%
+REM https://github.com/munsingh/googletest/releases/download/release-1.8.0.12/googletest_binaries_Debug_x64-1.8.0.12.zip
+
+if exist "%THIRDPARTY%\%Filename%" (
+	echo %Filename% file exists
+) else (
+	REM Download the file from github
+	REM And then extract it in the thirdParty directory
+	echo %Filename% file NOT found
+	echo Downloading it from %URL% using %WGET%
+	echo Executing command %WGET% %URL%/%Filename% -O %THIRDPARTY%\%Filename%
+	"%WGET%" "%URL%/%Filename%" -O %THIRDPARTY%\%Filename%
+)
+
+echo Searching for %GOOGLE_TEST_FILENAME%
+if exist "%GOOGLE_TEST_FILENAME%" (
+	echo googletest is already extracted
+) else (
+	echo Executing command %SEVENZ% x %THIRDPARTY%\%Filename% -o%THIRDPARTY%\googletest
+	%SEVENZ% x %THIRDPARTY%\%Filename% -o%THIRDPARTY%\googletest
+)
+
+set Filename=googletest_include-%GOOGLE_TEST_VERSION%.zip
+set URL=https://github.com/munsingh/googletest/releases/download/release-%GOOGLE_TEST_VERSION%
+REM https://github.com/munsingh/googletest/releases/download/release-1.8.0.12/googletest_binaries_Debug_x64-1.8.0.12.zip
+
+if exist "%THIRDPARTY%\%Filename%" (
+	echo %Filename% file exists
+) else (
+	REM Download the file from github
+	REM And then extract it in the thirdParty directory
+	echo %Filename% file NOT found
+	echo Downloading it from %URL% using %WGET%
+	echo Executing command %WGET% %URL%/%Filename% -O %THIRDPARTY%\%Filename%
+	"%WGET%" "%URL%/%Filename%" -O %THIRDPARTY%\%Filename%
+)
+
+set GOOGLE_INCLUDE_FILENAME=%THIRDPARTY%\googletest\gtest\gtest.h
+echo Searching for %GOOGLE_INCLUDE_FILENAME%
+if exist "%GOOGLE_INCLUDE_FILENAME%" (
+	echo googletest headers are already extracted
+) else (
+	echo Executing command %SEVENZ% x %THIRDPARTY%\%Filename% -o%THIRDPARTY%\googletest
+	%SEVENZ% x %THIRDPARTY%\%Filename% -o%THIRDPARTY%\googletest
+)
+
+exit /b 0</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Setting up 3rdParty libraries</Message>
+    </PreBuildEvent>
+    <Link>
+      <AdditionalLibraryDirectories>./../thirdParty/googletest/windows/vs/$(PlatformToolset)/$(Platform)/$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>gtest.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>./../inc;./../thirdParty/googletest</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <PreBuildEvent>
+      <Command>@echo off
+
+set GOOGLE_TEST_VERSION=1.8.0.14
+set THIRDPARTY=.\..\thirdParty
+set WGET=%THIRDPARTY%\wget.exe
+set SEVENZ=%THIRDPARTY%\7za.exe
+
+set GOOGLE_TEST_FILENAME=%THIRDPARTY%\googletest\windows\vs\$(PlatformToolset)\$(Platform)\$(Configuration)\gtest.lib
+set Filename=googletest_binaries_$(Configuration)_$(Platform)-%GOOGLE_TEST_VERSION%.zip
+set URL=https://github.com/munsingh/googletest/releases/download/release-%GOOGLE_TEST_VERSION%
+REM https://github.com/munsingh/googletest/releases/download/release-1.8.0.12/googletest_binaries_Debug_x64-1.8.0.12.zip
+
+if exist "%THIRDPARTY%\%Filename%" (
+	echo %Filename% file exists
+) else (
+	REM Download the file from github
+	REM And then extract it in the thirdParty directory
+	echo %Filename% file NOT found
+	echo Downloading it from %URL% using %WGET%
+	echo Executing command %WGET% %URL%/%Filename% -O %THIRDPARTY%\%Filename%
+	"%WGET%" "%URL%/%Filename%" -O %THIRDPARTY%\%Filename%
+)
+
+echo Searching for %GOOGLE_TEST_FILENAME%
+if exist "%GOOGLE_TEST_FILENAME%" (
+	echo googletest is already extracted
+) else (
+	echo Executing command %SEVENZ% x %THIRDPARTY%\%Filename% -o%THIRDPARTY%\googletest
+	%SEVENZ% x %THIRDPARTY%\%Filename% -o%THIRDPARTY%\googletest
+)
+
+set Filename=googletest_include-%GOOGLE_TEST_VERSION%.zip
+set URL=https://github.com/munsingh/googletest/releases/download/release-%GOOGLE_TEST_VERSION%
+REM https://github.com/munsingh/googletest/releases/download/release-1.8.0.12/googletest_binaries_Debug_x64-1.8.0.12.zip
+
+if exist "%THIRDPARTY%\%Filename%" (
+	echo %Filename% file exists
+) else (
+	REM Download the file from github
+	REM And then extract it in the thirdParty directory
+	echo %Filename% file NOT found
+	echo Downloading it from %URL% using %WGET%
+	echo Executing command %WGET% %URL%/%Filename% -O %THIRDPARTY%\%Filename%
+	"%WGET%" "%URL%/%Filename%" -O %THIRDPARTY%\%Filename%
+)
+
+set GOOGLE_INCLUDE_FILENAME=%THIRDPARTY%\googletest\gtest\gtest.h
+echo Searching for %GOOGLE_INCLUDE_FILENAME%
+if exist "%GOOGLE_INCLUDE_FILENAME%" (
+	echo googletest headers are already extracted
+) else (
+	echo Executing command %SEVENZ% x %THIRDPARTY%\%Filename% -o%THIRDPARTY%\googletest
+	%SEVENZ% x %THIRDPARTY%\%Filename% -o%THIRDPARTY%\googletest
+)
+
+exit /b 0</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Setting up 3rdParty libraries</Message>
+    </PreBuildEvent>
+    <Link>
+      <AdditionalLibraryDirectories>./../thirdParty/googletest/windows/vs/$(PlatformToolset)/$(Platform)/$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>gtest.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>./../inc;./../thirdParty/googletest</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>./../thirdParty/googletest/windows/vs/$(PlatformToolset)/$(Platform)/$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>gtest.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PreBuildEvent>
+      <Command>@echo off
+
+set GOOGLE_TEST_VERSION=1.8.0.14
+set THIRDPARTY=.\..\thirdParty
+set WGET=%THIRDPARTY%\wget.exe
+set SEVENZ=%THIRDPARTY%\7za.exe
+
+set GOOGLE_TEST_FILENAME=%THIRDPARTY%\googletest\windows\vs\$(PlatformToolset)\$(Platform)\$(Configuration)\gtest.lib
+set Filename=googletest_binaries_$(Configuration)_$(Platform)-%GOOGLE_TEST_VERSION%.zip
+set URL=https://github.com/munsingh/googletest/releases/download/release-%GOOGLE_TEST_VERSION%
+REM https://github.com/munsingh/googletest/releases/download/release-1.8.0.12/googletest_binaries_Debug_x64-1.8.0.12.zip
+
+if exist "%THIRDPARTY%\%Filename%" (
+	echo %Filename% file exists
+) else (
+	REM Download the file from github
+	REM And then extract it in the thirdParty directory
+	echo %Filename% file NOT found
+	echo Downloading it from %URL% using %WGET%
+	echo Executing command %WGET% %URL%/%Filename% -O %THIRDPARTY%\%Filename%
+	"%WGET%" "%URL%/%Filename%" -O %THIRDPARTY%\%Filename%
+)
+
+echo Searching for %GOOGLE_TEST_FILENAME%
+if exist "%GOOGLE_TEST_FILENAME%" (
+	echo googletest is already extracted
+) else (
+	echo Executing command %SEVENZ% x %THIRDPARTY%\%Filename% -o%THIRDPARTY%\googletest
+	%SEVENZ% x %THIRDPARTY%\%Filename% -o%THIRDPARTY%\googletest
+)
+
+set Filename=googletest_include-%GOOGLE_TEST_VERSION%.zip
+set URL=https://github.com/munsingh/googletest/releases/download/release-%GOOGLE_TEST_VERSION%
+REM https://github.com/munsingh/googletest/releases/download/release-1.8.0.12/googletest_binaries_Debug_x64-1.8.0.12.zip
+
+if exist "%THIRDPARTY%\%Filename%" (
+	echo %Filename% file exists
+) else (
+	REM Download the file from github
+	REM And then extract it in the thirdParty directory
+	echo %Filename% file NOT found
+	echo Downloading it from %URL% using %WGET%
+	echo Executing command %WGET% %URL%/%Filename% -O %THIRDPARTY%\%Filename%
+	"%WGET%" "%URL%/%Filename%" -O %THIRDPARTY%\%Filename%
+)
+
+set GOOGLE_INCLUDE_FILENAME=%THIRDPARTY%\googletest\gtest\gtest.h
+echo Searching for %GOOGLE_INCLUDE_FILENAME%
+if exist "%GOOGLE_INCLUDE_FILENAME%" (
+	echo googletest headers are already extracted
+) else (
+	echo Executing command %SEVENZ% x %THIRDPARTY%\%Filename% -o%THIRDPARTY%\googletest
+	%SEVENZ% x %THIRDPARTY%\%Filename% -o%THIRDPARTY%\googletest
+)
+
+exit /b 0</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Setting up 3rdParty libraries</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>./../inc;./../thirdParty/googletest</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>./../thirdParty/googletest/windows/vs/$(PlatformToolset)/$(Platform)/$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>gtest.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PreBuildEvent>
+      <Command>@echo off
+
+set GOOGLE_TEST_VERSION=1.8.0.14
+set THIRDPARTY=.\..\thirdParty
+set WGET=%THIRDPARTY%\wget.exe
+set SEVENZ=%THIRDPARTY%\7za.exe
+
+set GOOGLE_TEST_FILENAME=%THIRDPARTY%\googletest\windows\vs\$(PlatformToolset)\$(Platform)\$(Configuration)\gtest.lib
+set Filename=googletest_binaries_$(Configuration)_$(Platform)-%GOOGLE_TEST_VERSION%.zip
+set URL=https://github.com/munsingh/googletest/releases/download/release-%GOOGLE_TEST_VERSION%
+REM https://github.com/munsingh/googletest/releases/download/release-1.8.0.12/googletest_binaries_Debug_x64-1.8.0.12.zip
+
+if exist "%THIRDPARTY%\%Filename%" (
+	echo %Filename% file exists
+) else (
+	REM Download the file from github
+	REM And then extract it in the thirdParty directory
+	echo %Filename% file NOT found
+	echo Downloading it from %URL% using %WGET%
+	echo Executing command %WGET% %URL%/%Filename% -O %THIRDPARTY%\%Filename%
+	"%WGET%" "%URL%/%Filename%" -O %THIRDPARTY%\%Filename%
+)
+
+echo Searching for %GOOGLE_TEST_FILENAME%
+if exist "%GOOGLE_TEST_FILENAME%" (
+	echo googletest is already extracted
+) else (
+	echo Executing command %SEVENZ% x %THIRDPARTY%\%Filename% -o%THIRDPARTY%\googletest
+	%SEVENZ% x %THIRDPARTY%\%Filename% -o%THIRDPARTY%\googletest
+)
+
+set Filename=googletest_include-%GOOGLE_TEST_VERSION%.zip
+set URL=https://github.com/munsingh/googletest/releases/download/release-%GOOGLE_TEST_VERSION%
+REM https://github.com/munsingh/googletest/releases/download/release-1.8.0.12/googletest_binaries_Debug_x64-1.8.0.12.zip
+
+if exist "%THIRDPARTY%\%Filename%" (
+	echo %Filename% file exists
+) else (
+	REM Download the file from github
+	REM And then extract it in the thirdParty directory
+	echo %Filename% file NOT found
+	echo Downloading it from %URL% using %WGET%
+	echo Executing command %WGET% %URL%/%Filename% -O %THIRDPARTY%\%Filename%
+	"%WGET%" "%URL%/%Filename%" -O %THIRDPARTY%\%Filename%
+)
+
+set GOOGLE_INCLUDE_FILENAME=%THIRDPARTY%\googletest\gtest\gtest.h
+echo Searching for %GOOGLE_INCLUDE_FILENAME%
+if exist "%GOOGLE_INCLUDE_FILENAME%" (
+	echo googletest headers are already extracted
+) else (
+	echo Executing command %SEVENZ% x %THIRDPARTY%\%Filename% -o%THIRDPARTY%\googletest
+	%SEVENZ% x %THIRDPARTY%\%Filename% -o%THIRDPARTY%\googletest
+)
+
+exit /b 0</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Setting up 3rdParty libraries</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

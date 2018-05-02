@@ -24,7 +24,7 @@ template <class T> class Node {
 		void		SetData(const T& oData) { m_oData = oData; };
 		const T&	GetData() const { return m_oData; };
 
-		void		SetNext(const <Node>* pNext) { m_pNext = pNext; };
+		void		SetNext(const Node<T>* pNext) { m_pNext = pNext; };
 		Node<T>*	GetNext() const { return m_pNext; };
 
 		//TODO:: Move constructor

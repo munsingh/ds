@@ -11,7 +11,7 @@ template <class T> class List {
 				List(const List<T>& oList);
 
 		//destructors
-		virtual List();
+		virtual ~List();
 
 		//overloaded operators
 		List<T>& operator= (const List<T>& oList);
@@ -25,7 +25,7 @@ template <class T> class List {
 	protected:
 		//member attribues
 		Node<T>* m_pHead = nullptr;
-		bool	 m_pSorted(false);
+		bool	 m_pSorted = false;
 
 		//member functions
 		void		SetHead(const Node<T>* pNode) { m_pHead = pNode; };
@@ -33,6 +33,12 @@ template <class T> class List {
 };
 
 //Implementation
+
+//destructor
+
+template <class T> List<T>::~List() {
+	EmptyList();
+}
 
 //constructors
 template <class T> List<T>::List(const List<T>& oList) {
@@ -54,7 +60,7 @@ template <class T> List<T>& List<T>::operator= (const List<T>& oList) {
 
 //member functions
 template <class T> Node<T>* List<T>::AddHead(const T& oData) {
-	return AddHead(new Node<T>(oData, GetHead());
+	return AddHead(new Node<T>(oData, GetHead()));
 }
 
 template <class T> Node<T>* List<T>::AddHead(const Node<T>* oNode) {

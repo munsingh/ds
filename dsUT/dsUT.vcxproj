@@ -255,7 +255,8 @@ exit /b 0</Command>
     <PreBuildEvent>
       <Command>@echo off
 
-set GOOGLE_TEST_VERSION=1.8.0.14
+set
+REM set GOOGLE_TEST_VERSION=1.8.0.14
 set THIRDPARTY=.\..\thirdParty
 set WGET=%THIRDPARTY%\wget.exe
 set SEVENZ=%THIRDPARTY%\7za.exe

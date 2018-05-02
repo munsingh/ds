@@ -154,9 +154,6 @@
     <ClInclude Include="inc\Node.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="appveyor.yml" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

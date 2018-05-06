@@ -16,4 +16,4 @@ build:
   parallel: true
   verbosity: minimal
 test_script:
-- cmd: '%APPVEYOR_BUILD_FOLDER%\output\windows\vs\%PlatformToolset\%platform%\%configuration%\dsUT.exe --gtest_output="xml:%APPVEYOR_BUILD_FOLDER%\.\..\output\windows\vs\%PlatformToolset\%platform%\%configuration%\dsUT.xml'
+- cmd: 'C:\projects\ds\dsUT\./../output/windows/vs/v141/Win32/Debug/dsUT.exe --gtest_output="xml:C:\projects\ds\dsUT\./../output/windows/vs/v141/Win32/Debug/dsUT.xml'

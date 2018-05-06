@@ -9,7 +9,10 @@ configuration:
 platform:
 - Win32
 - x64
+platformtoolset: v141
 build:
   project: ds.sln
   parallel: true
   verbosity: minimal
+test_script:
+- cmd: '%APPVEYOR_BUILD_FOLDER%\./../output/windows/vs/%PlatformToolset/%platform%/%configuration%/dsUT.exe --gtest_output="xml:%APPVEYOR_BUILD_FOLDER%\./../output/windows/vs/%PlatformToolset/%platform%/%configuration%/dsUT.xml"

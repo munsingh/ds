@@ -9,7 +9,6 @@ configuration:
 platform:
 - Win32
 - x64
-platformtoolset: v141
 build:
   project: ds.sln
   parallel: true

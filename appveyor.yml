@@ -16,6 +16,6 @@ build:
   parallel: true
   verbosity: minimal
 test_script:
-- cmd: '%APPVEYOR_BUILD_FOLDER%\dsUT\./../output/windows/vs/%PlatformToolset%/%PLATFORM%/%CONFIGURATION%/dsUT.exe --gtest_output="xml:.\dsUT.xml'
+- cmd: '%APPVEYOR_BUILD_FOLDER%\dsUT\./../output/windows/vs/%PlatformToolset%/%PLATFORM%/%CONFIGURATION%/dsUT.exe --gtest_output="xml:.\dsUT_%CONFIGURATION%_%PLATFORM%.xml'
 on_finish:
-- ps: (new-object net.webclient).UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\dsUT.xml))
+- ps: (new-object net.webclient).UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\dsUT_$($env:CONFIGURATION)_$($env:PLATFORM).xml))

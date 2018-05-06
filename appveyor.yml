@@ -16,4 +16,4 @@ build:
   parallel: true
   verbosity: minimal
 test_script:
-- cmd: 'C:\projects\ds\dsUT\./../output/windows/vs/v141/Win32/Debug/dsUT.exe --gtest_output="xml:C:\projects\ds\dsUT\./../output/windows/vs/v141/Win32/Debug/dsUT.xml'
+- cmd: 'C:\projects\ds\dsUT\./../output/windows/vs/v141/%PLATFORM%/Debug/dsUT.exe --gtest_output="xml:C:\projects\ds\dsUT\./../output/windows/vs/v141/%PLATFORM%/Debug/dsUT.xml'

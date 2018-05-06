@@ -1,4 +1,6 @@
 version: 1.0.{build}
+environment:
+  PlatformToolset: v141
 branches:
   only:
   - master

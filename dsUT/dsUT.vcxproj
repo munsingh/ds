@@ -104,7 +104,7 @@ set WGET=%THIRDPARTY%\wget.exe
 set SEVENZ=%THIRDPARTY%\7za.exe
 
 set GOOGLE_TEST_FILENAME=%THIRDPARTY%\googletest\windows\vs\$(PlatformToolset)\$(Platform)\$(Configuration)\gtest.lib
-set Filename=googletest_binaries_$(Configuration)_DLL_$(Platform)-%GOOGLE_TEST_VERSION%.zip
+set Filename=googletest_binaries_$(Configuration)_$(Platform)-%GOOGLE_TEST_VERSION%.zip
 set URL=https://github.com/munsingh/googletest/releases/download/release-%GOOGLE_TEST_VERSION%
 REM https://github.com/munsingh/googletest/releases/download/release-1.8.0.12/googletest_binaries_Debug_x64-1.8.0.12.zip
 
@@ -265,7 +265,7 @@ set WGET=%THIRDPARTY%\wget.exe
 set SEVENZ=%THIRDPARTY%\7za.exe
 
 set GOOGLE_TEST_FILENAME=%THIRDPARTY%\googletest\windows\vs\$(PlatformToolset)\$(Platform)\$(Configuration)\gtest.lib
-set Filename=googletest_binaries_$(Configuration)_DLL_$(Platform)-%GOOGLE_TEST_VERSION%.zip
+set Filename=googletest_binaries_$(Configuration)_$(Platform)-%GOOGLE_TEST_VERSION%.zip
 set URL=https://github.com/munsingh/googletest/releases/download/release-%GOOGLE_TEST_VERSION%
 REM https://github.com/munsingh/googletest/releases/download/release-1.8.0.12/googletest_binaries_Debug_x64-1.8.0.12.zip
 
@@ -345,7 +345,7 @@ set WGET=%THIRDPARTY%\wget.exe
 set SEVENZ=%THIRDPARTY%\7za.exe
 
 set GOOGLE_TEST_FILENAME=%THIRDPARTY%\googletest\windows\vs\$(PlatformToolset)\$(Platform)\$(Configuration)\gtest.lib
-set Filename=googletest_binaries_$(Configuration)_DLL_$(Platform)-%GOOGLE_TEST_VERSION%.zip
+set Filename=googletest_binaries_$(Configuration)_$(Platform)-%GOOGLE_TEST_VERSION%.zip
 set URL=https://github.com/munsingh/googletest/releases/download/release-%GOOGLE_TEST_VERSION%
 REM https://github.com/munsingh/googletest/releases/download/release-1.8.0.12/googletest_binaries_Debug_x64-1.8.0.12.zip
 

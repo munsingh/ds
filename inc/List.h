@@ -20,6 +20,7 @@ template <class T> class List {
 		Node<T>*	AddHead(const T& oData);
 		Node<T>*	AddHead(const Node<T>* oNode);
 		Node<T>*	GetHead() const { return m_pHead; };
+		size_t		GetSize() const;
 
 		void		EmptyList();
 	protected:
@@ -28,7 +29,7 @@ template <class T> class List {
 		bool	 m_pSorted = false;
 
 		//member functions
-		void		SetHead(const Node<T>* pNode) { m_pHead = pNode; };
+		void		SetHead(Node<T>* pNode) { m_pHead = pNode; };
 		void		CopyList(const List<T>& oList);
 };
 
@@ -93,4 +94,16 @@ template <class T> void List<T>::CopyList(const List<T>& oList) {
 		pPrev = pNew;
 		pSourceNode = pSourceNode->GetNext();
 	}
+}
+
+template <class T> size_t List<T>::GetSize() const {
+	size_t		nSize = 0;
+	Node<T>*	pNode = GetHead();
+
+	while (nullptr != pNode) {
+		++nSize;
+		pNode = pNode->GetNext();
+	}
+
+	return nSize;
 }

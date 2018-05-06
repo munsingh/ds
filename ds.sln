@@ -5,15 +5,12 @@ VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ds", "ds.vcxproj", "{0D7B4E72-F994-44BA-9CDB-2143CE180FC3}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dsUT", "dsUT\dsUT.vcxproj", "{92E2254A-5FA8-4985-89E5-260BAD0CA9F3}"
-	ProjectSection(ProjectDependencies) = postProject
-		{0D7B4E72-F994-44BA-9CDB-2143CE180FC3} = {0D7B4E72-F994-44BA-9CDB-2143CE180FC3}
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DB467277-54DA-4219-A2A7-19D77559DEC6}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dsUT", "dsUT\dsUT.vcxproj", "{92E2254A-5FA8-4985-89E5-260BAD0CA9F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

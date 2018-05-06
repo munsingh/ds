@@ -31,4 +31,4 @@ BOOL WINAPI DllMain(__in HINSTANCE hInstDLL,
 	return TRUE; //Successful DLL_PROCESS_ATTACH
 }
 
-__declspec(dllexport) void Dummy() {};
+__declspec(dllexport) int Dummy() { return 0; };

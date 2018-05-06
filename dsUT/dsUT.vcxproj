@@ -93,17 +93,18 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>./../inc;./../thirdParty/googletest</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PreprocessorDefinitions>_WIN32;_WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PreBuildEvent>
       <Command>@echo off
 
-set GOOGLE_TEST_VERSION=1.8.0.14
+set GOOGLE_TEST_VERSION=1.8.0.15
 set THIRDPARTY=.\..\thirdParty
 set WGET=%THIRDPARTY%\wget.exe
 set SEVENZ=%THIRDPARTY%\7za.exe
 
 set GOOGLE_TEST_FILENAME=%THIRDPARTY%\googletest\windows\vs\$(PlatformToolset)\$(Platform)\$(Configuration)\gtest.lib
-set Filename=googletest_binaries_$(Configuration)_$(Platform)-%GOOGLE_TEST_VERSION%.zip
+set Filename=googletest_binaries_$(Configuration)_DLL_$(Platform)-%GOOGLE_TEST_VERSION%.zip
 set URL=https://github.com/munsingh/googletest/releases/download/release-%GOOGLE_TEST_VERSION%
 REM https://github.com/munsingh/googletest/releases/download/release-1.8.0.12/googletest_binaries_Debug_x64-1.8.0.12.zip
 
@@ -165,14 +166,14 @@ exit /b 0</Command>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>./../inc;./../thirdParty/googletest</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PreprocessorDefinitions>_WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PreBuildEvent>
       <Command>@echo off
 
-set GOOGLE_TEST_VERSION=1.8.0.14
+set GOOGLE_TEST_VERSION=1.8.0.15
 set THIRDPARTY=.\..\thirdParty
 set WGET=%THIRDPARTY%\wget.exe
 set SEVENZ=%THIRDPARTY%\7za.exe
@@ -233,6 +234,8 @@ exit /b 0</Command>
     <Link>
       <AdditionalLibraryDirectories>./../thirdParty/googletest/windows/vs/$(PlatformToolset)/$(Platform)/$(Configuration)</AdditionalLibraryDirectories>
       <AdditionalDependencies>gtest.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -245,6 +248,7 @@ exit /b 0</Command>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>./../inc;./../thirdParty/googletest</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PreprocessorDefinitions>_WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -255,14 +259,13 @@ exit /b 0</Command>
     <PreBuildEvent>
       <Command>@echo off
 
-set
-REM set GOOGLE_TEST_VERSION=1.8.0.14
+set GOOGLE_TEST_VERSION=1.8.0.15
 set THIRDPARTY=.\..\thirdParty
 set WGET=%THIRDPARTY%\wget.exe
 set SEVENZ=%THIRDPARTY%\7za.exe
 
 set GOOGLE_TEST_FILENAME=%THIRDPARTY%\googletest\windows\vs\$(PlatformToolset)\$(Platform)\$(Configuration)\gtest.lib
-set Filename=googletest_binaries_$(Configuration)_$(Platform)-%GOOGLE_TEST_VERSION%.zip
+set Filename=googletest_binaries_$(Configuration)_DLL_$(Platform)-%GOOGLE_TEST_VERSION%.zip
 set URL=https://github.com/munsingh/googletest/releases/download/release-%GOOGLE_TEST_VERSION%
 REM https://github.com/munsingh/googletest/releases/download/release-1.8.0.12/googletest_binaries_Debug_x64-1.8.0.12.zip
 
@@ -325,6 +328,7 @@ exit /b 0</Command>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>./../inc;./../thirdParty/googletest</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PreprocessorDefinitions>_WIN32;_WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -335,13 +339,13 @@ exit /b 0</Command>
     <PreBuildEvent>
       <Command>@echo off
 
-set GOOGLE_TEST_VERSION=1.8.0.14
+set GOOGLE_TEST_VERSION=1.8.0.15
 set THIRDPARTY=.\..\thirdParty
 set WGET=%THIRDPARTY%\wget.exe
 set SEVENZ=%THIRDPARTY%\7za.exe
 
 set GOOGLE_TEST_FILENAME=%THIRDPARTY%\googletest\windows\vs\$(PlatformToolset)\$(Platform)\$(Configuration)\gtest.lib
-set Filename=googletest_binaries_$(Configuration)_$(Platform)-%GOOGLE_TEST_VERSION%.zip
+set Filename=googletest_binaries_$(Configuration)_DLL_$(Platform)-%GOOGLE_TEST_VERSION%.zip
 set URL=https://github.com/munsingh/googletest/releases/download/release-%GOOGLE_TEST_VERSION%
 REM https://github.com/munsingh/googletest/releases/download/release-1.8.0.12/googletest_binaries_Debug_x64-1.8.0.12.zip
 
@@ -396,6 +400,9 @@ exit /b 0</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ListTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

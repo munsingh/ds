@@ -66,7 +66,7 @@ template <class T> List<T>::List(const List<T>& oList) {
 
 //overloaded operators
 template <class T> List<T>& List<T>::operator= (const List<T>& oList) {
-	if (*this != oList) {
+	if (this != &oList) {
 		//Since we are assigning this list to be the same as another list
 		//we need to fist empty this list
 		EmptyList();

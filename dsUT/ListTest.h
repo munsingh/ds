@@ -44,6 +44,18 @@ TEST_F(ListTest, CopyConstructor) {
 	ASSERT_STRCASEEQ(oStrStream.str().c_str(), "0->9->7->1->3->2->NULL") << "Copy constructor failed.";
 }
 
+TEST_F(ListTest, AssignmentOperator) {
+	m_oList1 = m_oUnsortedList;
+	
+	ASSERT_EQ(m_oList1.GetSize(), 6) << "Size mismatch while copy constructing";
+
+	//Dump the oList to a stringstream
+	std::stringstream oStrStream;
+	oStrStream << m_oList1;
+
+	ASSERT_STRCASEEQ(oStrStream.str().c_str(), "0->9->7->1->3->2->NULL") << "Assignment constructor failed.";
+}
+
 TEST_F(ListTest, InsertionOperator) {
 	2 >> m_oList1;
 	ASSERT_EQ(m_oList1.GetSize(), 1) << "After inserting single data, the size should be 1";

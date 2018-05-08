@@ -7,7 +7,7 @@ template <class T> class List {
 	public:
 		//constructors
 				List(bool bSorted = false)
-					:m_pHead(nullptr), m_pSorted(bSorted) {};
+					:m_pHead(nullptr), m_bSorted(bSorted) {};
 				List(const List<T>& oList);
 
 		//destructors
@@ -18,15 +18,32 @@ template <class T> class List {
 
 		//member functions
 		Node<T>*	AddHead(const T& oData);
-		Node<T>*	AddHead(const Node<T>* oNode);
+		Node<T>*	AddHead(Node<T>* oNode);
 		Node<T>*	GetHead() const { return m_pHead; };
+
+		Node<T>*	AddNode(const T& oData);
 		size_t		GetSize() const;
 
 		void		EmptyList();
+		bool		IsSorted() const { return m_bSorted; };
+
+		//overloaded operators
+
+		//insertion operator
+		//The idea is to write the contents of the list to the stdout
+
+		//overload the extraction operator >> to add nodes to the list
+		template< class T>
+		friend List<T>& operator>> (const T&oData, List<T>& oList);
+
+		//overloaded insertion operator
+		template <class T>
+		friend std::ostream& operator <<(std::ostream& out, const List<T>& oList);
+
 	protected:
 		//member attribues
 		Node<T>* m_pHead = nullptr;
-		bool	 m_pSorted = false;
+		bool	 m_bSorted = false;
 
 		//member functions
 		void		SetHead(Node<T>* pNode) { m_pHead = pNode; };
@@ -64,7 +81,7 @@ template <class T> Node<T>* List<T>::AddHead(const T& oData) {
 	return AddHead(new Node<T>(oData, GetHead()));
 }
 
-template <class T> Node<T>* List<T>::AddHead(const Node<T>* oNode) {
+template <class T> Node<T>* List<T>::AddHead(Node<T>* pNode) {
 	SetHead(pNode);
 	return GetHead();
 }
@@ -106,4 +123,50 @@ template <class T> size_t List<T>::GetSize() const {
 	}
 
 	return nSize;
+}
+
+template <class T> Node<T>* List<T>::AddNode(const T& oData) {
+	//If the list is sorted, then add data in a sorted manner
+	//otherwise add the new node as the head
+	if (IsSorted()) {
+		Node<T>* pCurr = GetHead();
+		Node<T>* pPrev = nullptr;
+
+		while (pCurr && pCurr->GetData() < oData) {
+			pPrev = pCurr;
+			pCurr = pCurr->GetNext();
+		}
+
+		//We have found the pCurr node whose data is less than the 
+		//given data
+		//So we have to add the new node after pPrev and before pCurr
+		Node<T>* pNewNode = new Node<T>(oData);
+		if (nullptr == pPrev) {
+			SetHead(pNewNode);
+		}
+		else {
+			pNewNode->SetNext(pPrev->GetNext());
+			pPrev->SetNext(pNewNode);
+		}
+		return pNewNode;
+	}
+	else
+		return AddHead(oData);
+}
+
+//overloaded operators
+template <class T> List<T>& operator>>(const T& oData, List<T>& oList) {
+	oList.AddNode(oData);
+	return oList;
+}
+
+template <class T> std::ostream& operator <<(std::ostream& out, const List<T>& oList) {
+	//we iterate over the list and dump its contents to the ostream
+	Node<T>* pCurrNode = oList.GetHead();
+	while (pCurrNode) {
+		out << pCurrNode;
+		pCurrNode = pCurrNode->GetNext();
+	}
+
+	return out;
 }

@@ -19,10 +19,15 @@ template <class T> class List {
 		//member functions
 		Node<T>*	AddHead(const T& oData);
 		Node<T>*	AddHead(Node<T>* oNode);
-		Node<T>*	GetHead() const { return m_pHead; };
-
 		Node<T>*	AddNode(const T& oData);
+		Node<T>*	AddTail(const T& oData);
+		Node<T>*	AddTail(Node<T>* pNode);
+		Node<T>*	AddAt(const T& oData, size_t nPos);
+		
+
+		Node<T>*	GetHead() const { return m_pHead; };
 		size_t		GetSize() const;
+		Node<T>*	GetTail() const;
 
 		void		EmptyList();
 		bool		IsSorted() const { return m_bSorted; };
@@ -48,6 +53,8 @@ template <class T> class List {
 		//member functions
 		void		SetHead(Node<T>* pNode) { m_pHead = pNode; };
 		void		CopyList(const List<T>& oList);
+
+		Node<T>*	AddAt(Node<T>* pNode, size_t nPos);
 };
 
 //Implementation
@@ -154,6 +161,66 @@ template <class T> Node<T>* List<T>::AddNode(const T& oData) {
 		return AddHead(oData);
 }
 
+template <class T> Node<T>* List<T>::AddTail(const T& oData) {
+	return AddTail(new Node<T>(oData));
+}
+
+template <class T> Node<T>* List<T>::AddTail(Node<T>* pNode) {
+	//Add Node at end
+	Node<T>* pTail = GetTail();
+	if (pTail) {
+		pNode->SetNext(pTail->GetNext());
+		pTail->SetNext(pNode);
+	}
+	else {
+		AddHead(pNode);
+	}
+
+	return pNode;
+}
+
+template <class T> Node<T>* List<T>::GetTail() const {
+	Node<T>* pTail = nullptr;
+	Node<T>* pCurr = GetHead();
+
+	while (pCurr) {
+		pTail = pCurr;
+		pCurr = pCurr->GetNext();
+	}
+
+	return pTail;
+}
+
+template <class T> Node<T>* List<T>::AddAt(const T& oData, size_t nPos) {
+	if (nPos > GetSize())
+		return nullptr;
+	return AddAt(new Node<T>(oData), nPos);
+}
+
+template <class T> Node<T>* List<T>::AddAt(Node<T>* pNode, size_t nPos) {
+	//Add the node at the desired position nPos
+	Node<T>* pCurr = GetHead();
+	Node<T>* pPrev = nullptr;
+	size_t   nCurrPos = 0;
+	
+	while (pCurr && nCurrPos < nPos) {
+		pPrev = pCurr;
+		pCurr = pCurr->GetNext();
+		++nCurrPos;
+	}
+
+	if (pPrev) {
+		pNode->SetNext(pPrev->GetNext());
+		pPrev->SetNext(pNode);
+	}
+	else {
+		//pPrev is null, which means that we have to add at begining
+		pNode->SetNext(GetHead());
+		SetHead(pNode);
+	}
+
+	return pNode;
+}
 //overloaded operators
 template <class T> List<T>& operator>>(const T& oData, List<T>& oList) {
 	oList.AddNode(oData);

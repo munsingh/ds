@@ -62,5 +62,45 @@ TEST_F(ListTest, InsertionOperator) {
 	ASSERT_EQ(m_oList1.GetHead()->GetData(), 2) << "The Head node data should be 2";
 }
 
+TEST_F(ListTest, AddTail) {
+	m_oUnsortedList.AddTail(6);
+	std::stringstream oStrStream;
+	oStrStream << m_oUnsortedList;
+	ASSERT_STRCASEEQ(oStrStream.str().c_str(), "0->9->7->1->3->2->6->NULL") << "New node should be at the end.";
+}
+
+TEST_F(ListTest, AddTailEmptyList) {
+	m_oList1.AddTail(2);
+
+	ASSERT_EQ(m_oList1.GetSize(), 1) << "After inserting single data, the size should be 1";
+	ASSERT_EQ(m_oList1.GetHead()->GetData(), 2) << "The Head node data should be 2";
+
+	std::stringstream oStrStream;
+	oStrStream << m_oList1;
+	ASSERT_STRCASEEQ(oStrStream.str().c_str(), "2->NULL") << "New node should be the head node.";
+}
+
+TEST_F(ListTest, AddAt0) {
+	m_oUnsortedList.AddAt(6, 0);
+	ASSERT_EQ(m_oUnsortedList.GetHead()->GetData(), 6) << "The Head node data should be 6";
+
+	std::stringstream oStrStream;
+	oStrStream << m_oUnsortedList;
+	ASSERT_STRCASEEQ(oStrStream.str().c_str(), "6->0->9->7->1->3->2->NULL") << "New node should be at the begining.";
+}
+
+TEST_F(ListTest, AddAtEnd) {
+	m_oUnsortedList.AddAt(6, m_oUnsortedList.GetSize());
+	std::stringstream oStrStream;
+	oStrStream << m_oUnsortedList;
+	ASSERT_STRCASEEQ(oStrStream.str().c_str(), "0->9->7->1->3->2->6->NULL") << "New node should be at the end.";
+}
+
+TEST_F(ListTest, AddAtPos3) {
+	m_oUnsortedList.AddAt(6, 3);
+	std::stringstream oStrStream;
+	oStrStream << m_oUnsortedList;
+	ASSERT_STRCASEEQ(oStrStream.str().c_str(), "0->9->7->6->1->3->2->NULL") << "New node should be at the end.";
+}
 
 

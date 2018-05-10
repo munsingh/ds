@@ -148,7 +148,7 @@ TEST_F(ListTest, DeleteNodeLast) {
 	oStrStream << m_oUnsortedList;
 
 	//0,9,7,1,3,2
-	ASSERT_STRCASEEQ(oStrStream.str().c_str(), "0->9->1->3->NULL") << "The last node should be deleted.";
+	ASSERT_STRCASEEQ(oStrStream.str().c_str(), "0->9->7->1->3->NULL") << "The last node should be deleted.";
 }
 
 TEST_F(ListTest, DeleteNodeNonExistent) {
@@ -165,4 +165,53 @@ TEST_F(ListTest, DeleteNodeEmptyList) {
 	ASSERT_FALSE(bRetVal) << "Since the list is empty, it shold return false.";
 	delete pNode;
 	pNode = nullptr;
+}
+
+TEST_F(ListTest, GetMidEvenNumberedList) {
+	//0,9,7,1,3,2 Mid should 7
+	//10,0,9,7,1,3,2 Mid should be 7
+	ASSERT_EQ(m_oUnsortedList.GetMid()->GetData(), 1) << "Even Numbered list mid should be 7.";
+}
+
+TEST_F(ListTest, GetMidOddNumberedList) {
+	//0,9,7,1,3,2 Mid should 7
+	//10,0,9,7,1,3,2 Mid should be 7
+	10 >> m_oUnsortedList;
+	ASSERT_EQ(m_oUnsortedList.GetMid()->GetData(), 7) << "Even Numbered list mid should be 7.";
+}
+
+TEST_F(ListTest, GetMidEmptyList) {
+	ASSERT_EQ(m_oList1.GetMid(), nullptr) << "Should be null.";
+}
+
+TEST_F(ListTest, GetNthLastEmptyList) {
+	ASSERT_EQ(m_oList1.GetNthLast(2), nullptr) << "Should be null for an empty list.";
+}
+
+TEST_F(ListTest, Get1stLast) {
+	//Get the last node
+	//0,9,7,1,3,2 should return 2 
+	ASSERT_EQ(m_oUnsortedList.GetNthLast(1)->GetData(), 2) << "1st Last should be 2";
+}
+
+TEST_F(ListTest, Get0thLast) {
+	//Get the last node
+	//0,9,7,1,3,2 should return 2 
+	ASSERT_EQ(m_oUnsortedList.GetNthLast(0)->GetData(), 2) << "1st Last should be 2";
+}
+
+TEST_F(ListTest, GetSizeLast) {
+	//Get the first node
+	//0,9,7,1,3,2 should return 0
+	ASSERT_EQ(m_oUnsortedList.GetNthLast(m_oUnsortedList.GetSize() )->GetData(), 0) << "This should be the head node.";
+}
+
+TEST_F(ListTest, GetOutofBoundsLast) {
+	//0,9,7,1,3,2 should return null
+	ASSERT_EQ(m_oUnsortedList.GetNthLast(20), nullptr) << "Should return a null pointer";
+}
+
+TEST_F(ListTest, Get3rdLast) {
+	//0,9,7,1,3,2 should return 1
+	ASSERT_EQ(m_oUnsortedList.GetNthLast(3)->GetData(), 1) << "3rd Last is 1";
 }

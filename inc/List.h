@@ -28,7 +28,9 @@ template <class T> class List {
 		Node<T>*	GetHead() const { return m_pHead; };
 		size_t		GetSize() const;
 		Node<T>*	GetTail() const;
-		Node<T>*	GetAt(size_t nPos);
+		Node<T>*	GetAt(size_t nPos) const;
+		Node<T>*	GetMid() const;
+		Node<T>*	GetNthLast(size_t nPos) const;
 
 		bool		DeleteNode(Node<T>* pNode);
 		void		EmptyList();
@@ -194,7 +196,7 @@ template <class T> Node<T>* List<T>::GetTail() const {
 	return pTail;
 }
 
-template <class T> Node<T>* List<T>::GetAt(size_t nPos) {
+template <class T> Node<T>* List<T>::GetAt(size_t nPos) const {
 	Node<T>* pCurr = GetHead();
 	size_t   nCurrPos = 0;
 
@@ -203,6 +205,61 @@ template <class T> Node<T>* List<T>::GetAt(size_t nPos) {
 	}
 
 	return pCurr;
+}
+
+template <class T> Node<T>* List<T>::GetMid() const {
+	//finds and returns the node at the mid location
+	//Start with two pointers, move one pointer one node at
+	//a time, where as the other pointer moves two nodes at
+	//a time. The location of the first pointer when the second
+	//pointer hits the end is the mid node
+
+	Node<T>* pSlow = GetHead();
+	Node<T>* pFast = GetHead();
+
+	while (pFast) {
+		pFast = pFast->GetNext();
+
+		if (nullptr == pFast) {
+			break;
+		}
+		else {
+			pSlow = pSlow->GetNext();
+			pFast = pFast->GetNext();
+		}
+	}
+
+	return pSlow;
+}
+
+template <class T> Node<T>* List<T>::GetNthLast(size_t nNthLast) const {
+	//Start with two pointers, move the 2nd one n spaces
+	//and then start both of them together.
+	//The point when 2nd pointer reaches last,
+	//the first pointer will point to the nthLast.
+
+	Node<T>* pFirst = GetHead();
+	Node<T>* pSecond = GetHead();
+	if (nNthLast == 0)
+		nNthLast = 1;
+
+	size_t nIndex = 0;
+	while (pSecond) {
+		pSecond = pSecond->GetNext();
+
+		if (nIndex >= nNthLast) {
+			pFirst = pFirst->GetNext();
+		}
+		else
+			++nIndex;
+ 	}
+
+	if (nullptr == pSecond && nNthLast > nIndex) {
+		//out of bounds nthlast requested
+		return nullptr;
+	}
+	else
+		return pFirst;
 }
 
 template <class T> Node<T>* List<T>::AddAt(const T& oData, size_t nPos) {

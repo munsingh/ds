@@ -28,9 +28,12 @@ template <class T> class List {
 		Node<T>*	GetHead() const { return m_pHead; };
 		size_t		GetSize() const;
 		Node<T>*	GetTail() const;
+		Node<T>*	GetAt(size_t nPos);
 
+		bool		DeleteNode(Node<T>* pNode);
 		void		EmptyList();
 		bool		IsSorted() const { return m_bSorted; };
+		bool		IsEmpty() const { return nullptr == GetHead(); };
 
 		//overloaded operators
 
@@ -191,6 +194,17 @@ template <class T> Node<T>* List<T>::GetTail() const {
 	return pTail;
 }
 
+template <class T> Node<T>* List<T>::GetAt(size_t nPos) {
+	Node<T>* pCurr = GetHead();
+	size_t   nCurrPos = 0;
+
+	while (pCurr && nCurrPos++ < nPos) {
+		pCurr = pCurr->GetNext();
+	}
+
+	return pCurr;
+}
+
 template <class T> Node<T>* List<T>::AddAt(const T& oData, size_t nPos) {
 	if (nPos > GetSize())
 		return nullptr;
@@ -221,6 +235,55 @@ template <class T> Node<T>* List<T>::AddAt(Node<T>* pNode, size_t nPos) {
 
 	return pNode;
 }
+
+template <class T> bool List<T>::DeleteNode(Node<T>* pNode) {
+	//If last node then the delete operation will be O(n) otherwise i
+	//it is O(1)
+
+	if (IsEmpty())
+		return false;
+
+	//Check whether this is last node
+	Node<T>* pNext = nullptr;
+	if (nullptr == (pNext = pNode->GetNext())) {
+		//last node
+		Node<T>* pCurr = GetHead();
+		Node<T>* pPrev = nullptr;
+
+		while (pCurr && pCurr != pNode) {
+			pPrev = pCurr;
+			pCurr = pCurr->GetNext();
+		}
+
+		if (pCurr) {
+			//pCurr is the node to be deleted
+			pPrev->SetNext(pCurr->GetNext());
+
+			if (pCurr == GetHead()) {
+				SetHead(pCurr->GetNext());
+			}
+
+			delete pCurr;
+			pCurr = nullptr;
+		}
+		else
+			return false;
+	}
+	else {
+		//in between node
+		//so take on the contents of the next node
+		//point this node to next node's next node
+		//and then delete the next node
+
+		pNode->SetData(pNext->GetData());
+		pNode->SetNext(pNext->GetNext());
+		delete pNext;
+		pNext = nullptr;
+	}
+
+	return true;
+}
+
 //overloaded operators
 template <class T> List<T>& operator>>(const T& oData, List<T>& oList) {
 	oList.AddNode(oData);

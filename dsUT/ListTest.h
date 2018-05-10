@@ -103,4 +103,66 @@ TEST_F(ListTest, AddAtPos3) {
 	ASSERT_STRCASEEQ(oStrStream.str().c_str(), "0->9->7->6->1->3->2->NULL") << "New node should be at the end.";
 }
 
+TEST_F(ListTest, GetAt0) {
+	Node<int>* pAt0 = m_oUnsortedList.GetAt(0);
+	ASSERT_EQ(pAt0->GetData(), 0) << "Head should be there at position 0";
+}
 
+TEST_F(ListTest, GetAtRandom) {
+	Node<int>* pAt = m_oUnsortedList.GetAt(2);
+	ASSERT_EQ(pAt->GetData(), 7) << "Node with data 7 should be there at position 2";
+}
+
+TEST_F(ListTest, GetAtEnd) {
+	Node<int>* pAtEnd = m_oUnsortedList.GetTail();
+	ASSERT_EQ(pAtEnd->GetData(), 2) << "Node with data 2 should be there at end position";
+}
+
+TEST_F(ListTest, GetAtOutofBounds) {
+	Node<int>* pAt = m_oUnsortedList.GetAt(20);
+	ASSERT_EQ(pAt, nullptr) << "This should be a nullptr.";
+}
+
+TEST_F(ListTest, DeleteNodeFirst) {
+	Node<int>* pNode = m_oUnsortedList.GetHead();
+	m_oUnsortedList.DeleteNode(pNode);
+
+	ASSERT_EQ(m_oUnsortedList.GetHead()->GetData(), 9);
+}
+
+TEST_F(ListTest, DeleteNodeRandomPos) {
+	Node<int>* pNode = m_oUnsortedList.GetAt(2);
+	m_oUnsortedList.DeleteNode(pNode);
+	std::stringstream oStrStream;
+	oStrStream << m_oUnsortedList;
+
+	//0,9,7,1,3,2
+	ASSERT_STRCASEEQ(oStrStream.str().c_str(), "0->9->1->3->2->NULL") << "New node should be at the end.";
+}
+
+TEST_F(ListTest, DeleteNodeLast) {
+	Node<int>* pNode = m_oUnsortedList.GetTail();
+	m_oUnsortedList.DeleteNode(pNode);
+	
+	std::stringstream oStrStream;
+	oStrStream << m_oUnsortedList;
+
+	//0,9,7,1,3,2
+	ASSERT_STRCASEEQ(oStrStream.str().c_str(), "0->9->1->3->NULL") << "The last node should be deleted.";
+}
+
+TEST_F(ListTest, DeleteNodeNonExistent) {
+	Node<int> *pNode = new Node<int>(12);
+	bool bRetVal = m_oUnsortedList.DeleteNode(pNode);
+	ASSERT_FALSE(bRetVal) << "Since the node does not exist in the list, it shold return false.";
+	delete pNode;
+	pNode = nullptr;
+}
+
+TEST_F(ListTest, DeleteNodeEmptyList) {
+	Node<int> *pNode = new Node<int>(12);
+	bool bRetVal = m_oUnsortedList.DeleteNode(pNode);
+	ASSERT_FALSE(bRetVal) << "Since the list is empty, it shold return false.";
+	delete pNode;
+	pNode = nullptr;
+}

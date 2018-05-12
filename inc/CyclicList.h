@@ -6,7 +6,7 @@
 template <class T> class CyclicList : public List<T> {
 	public:
 		//constructors
-				CyclicList() : List(), m_pCycleStart( nullptr ) {};
+				CyclicList() : List<T>(), m_pCycleStart( nullptr ) {};
 				//CyclicList(const& CyclicList& oCyclicList);
 
 		virtual ~CyclicList() { EmptyList(); };
@@ -23,7 +23,7 @@ template <class T> class CyclicList : public List<T> {
 };
 
 template <class T> void CyclicList<T>::EmptyList() {
-	Node<T>* pCurr = GetHead();
+	Node<T>* pCurr = List<T>::GetHead();
 	Node<T>* pPrev = nullptr;
 	bool bVisited = false;
 	
@@ -31,22 +31,22 @@ template <class T> void CyclicList<T>::EmptyList() {
 	//the cycle start node first time
 	//but delete it when you runinto it again the 2nd time.
 
-	while (nullptr != ( pCurr = GetHead())) {
+	while (nullptr != ( pCurr = List<T>::GetHead())) {
 		pPrev = pCurr;
 
 		if (bVisited) {
 			if (pPrev == m_pCycleStart) {
-				SetHead(nullptr);
+				List<T>::SetHead(nullptr);
 				delete pPrev;
 			}
 			else {
-				SetHead(pCurr->GetNext());
+				List<T>::SetHead(pCurr->GetNext());
 				delete pPrev;
 			}
 			pPrev = nullptr;
 		}
 		else {
-			SetHead(pCurr->GetNext());
+			List<T>::SetHead(pCurr->GetNext());
 			if (pPrev == m_pCycleStart) {
 				bVisited = true;
 			}
@@ -59,7 +59,7 @@ template <class T> void CyclicList<T>::EmptyList() {
 }
 
 template <class T> Node<T>* CyclicList<T>::CreateCycle(size_t nCyclePos) {
-	return CreateCycle(GetAt(nCyclePos));
+	return CreateCycle(List<T>::GetAt(nCyclePos));
 }
 
 template <class T> Node<T>* CyclicList<T>::CreateCycle(Node<T>* pCycleNode) {

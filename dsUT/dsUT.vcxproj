@@ -402,6 +402,7 @@ exit /b 0</Command>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CyclicListTest.h" />
     <ClInclude Include="ListTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

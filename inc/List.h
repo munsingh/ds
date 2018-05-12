@@ -17,26 +17,29 @@ template <class T> class List {
 		List<T>& operator= (const List<T>& oList);
 
 		//member functions
-		Node<T>*	AddHead(const T& oData);
-		Node<T>*	AddHead(Node<T>* oNode);
-		Node<T>*	AddNode(const T& oData);
-		Node<T>*	AddTail(const T& oData);
-		Node<T>*	AddTail(Node<T>* pNode);
-		Node<T>*	AddAt(const T& oData, size_t nPos);
+		virtual Node<T>*	AddHead(const T& oData);
+		virtual Node<T>*	AddHead(Node<T>* oNode);
+		virtual Node<T>*	AddNode(const T& oData);
+		virtual Node<T>*	AddTail(const T& oData);
+		virtual Node<T>*	AddTail(Node<T>* pNode);
+		virtual Node<T>*	AddAt(const T& oData, size_t nPos);
 		
 
-		Node<T>*	GetHead() const { return m_pHead; };
-		size_t		GetSize() const;
-		Node<T>*	GetTail() const;
-		Node<T>*	GetAt(size_t nPos) const;
-		Node<T>*	GetMid() const;
-		Node<T>*	GetNthLast(size_t nPos) const;
+		virtual Node<T>*	GetHead() const { return m_pHead; };
+		virtual size_t		GetSize() const;
+		virtual Node<T>*	GetTail() const;
+		virtual Node<T>*	GetAt(size_t nPos) const;
+		virtual Node<T>*	GetMid() const;
+		virtual Node<T>*	GetNthLast(size_t nPos) const;
 
-		bool		DeleteNode(Node<T>* pNode);
-		void		EmptyList();
-		bool		IsSorted() const { return m_bSorted; };
-		bool		IsEmpty() const { return nullptr == GetHead(); };
+		virtual bool		DeleteNode(Node<T>* pNode);
+		virtual void		EmptyList();
+		virtual bool		IsSorted() const { return m_bSorted; };
+		virtual bool		IsEmpty() const { return nullptr == GetHead(); };
 
+		//Cyclic List related functions
+		//Node<T>*	GetCycleStart(size_t& nCycleLength) const;
+		static bool	IsCyclic(List<T>& oList, Node<T>*& oNodeInCycle);
 		//overloaded operators
 
 		//insertion operator
@@ -56,10 +59,10 @@ template <class T> class List {
 		bool	 m_bSorted = false;
 
 		//member functions
-		void		SetHead(Node<T>* pNode) { m_pHead = pNode; };
-		void		CopyList(const List<T>& oList);
+		virtual void		SetHead(Node<T>* pNode) { m_pHead = pNode; };
+		virtual void		CopyList(const List<T>& oList);
 
-		Node<T>*	AddAt(Node<T>* pNode, size_t nPos);
+		virtual Node<T>*	AddAt(Node<T>* pNode, size_t nPos);
 };
 
 //Implementation
@@ -340,6 +343,63 @@ template <class T> bool List<T>::DeleteNode(Node<T>* pNode) {
 
 	return true;
 }
+
+//This function finds out whether a list is cyclic and if yes,
+//also makes availale a node within the cycle.
+template <class T> bool List<T>::IsCyclic(List<T>& oList, Node<T>*& oNodeInCycle) {
+	bool bIsCycle = false;
+	Node<T>* pFast = oList.GetHead();
+	Node<T*> pSlow = oList.GetHead();
+
+	while (pFast && pSlow) {
+		pFast = pFast->GetNext();
+		if (pSlow == pFast) {
+			bCycle = true;
+			break;
+		}
+
+		if (nullptr == pFast) {
+			break;//not a cycle
+		}
+
+		pFast = pFast->GetNext();
+		if (pSlow == pFast) {
+			bCycle = true;
+			break;
+		}
+
+		pSlow = pSlow->GetNext();
+	}
+
+	oNodeInCycle = bCycle ? pSlow : nullptr;
+	return bCycle;
+}
+
+//template <class T> Node<T>* List<T>::GetCycleStart(size_t& nCycleLength) const; {
+//	//We figure out whether the list is cyclic 
+//	//if it is then get the length of the cycle.
+//	Node<T>* pNodeInCycle = nullptr;
+//	bool	 bCyclic = List<T>::IsCyclic( *this, &pNodeInCycle );
+//	if (!bCyclic) {
+//		nCycleLength = 0;
+//		return nullptr;
+//	}
+//
+//	//There is a cycle, so calculate the length of the cycle.
+//	Node<T>* pNode1 = pNodeInCycle;
+//	Node<T>* pNode2 = pNodeInCycle->GetNext();
+//
+//	while (pNode1 != pNode2) {
+//		pNode2 = pNode2->GetNext();
+//		++nCycleLength;
+//	}
+//
+//	//Now we know the cyclelength
+//	//to get the cycle start
+//	//
+//	
+//}
+
 
 //overloaded operators
 template <class T> List<T>& operator>>(const T& oData, List<T>& oList) {

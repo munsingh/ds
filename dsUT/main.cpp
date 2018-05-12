@@ -1,5 +1,6 @@
 //Copyright ©2018, multics, Inc.All rights reserved.
 #include "ListTest.h"
+#include "CyclicListTest.h"
 #include "gtest/gtest.h"
 
 

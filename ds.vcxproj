@@ -154,6 +154,7 @@
     <PreBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="inc\CyclicList.h" />
     <ClInclude Include="inc\List.h" />
     <ClInclude Include="inc\Node.h" />
   </ItemGroup>

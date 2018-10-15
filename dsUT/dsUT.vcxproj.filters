@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="thirdParty">
+      <UniqueIdentifier>{e6840922-5dfc-4d0e-93a7-17c5b640bea7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -26,5 +29,13 @@
     <ClInclude Include="CyclicListTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\thirdParty\7za.exe">
+      <Filter>thirdParty</Filter>
+    </None>
+    <None Include="..\thirdParty\wget.exe">
+      <Filter>thirdParty</Filter>
+    </None>
   </ItemGroup>
 </Project>

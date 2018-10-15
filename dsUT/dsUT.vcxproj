@@ -98,7 +98,7 @@
     <PreBuildEvent>
       <Command>@echo off
 
-set GOOGLE_TEST_VERSION=1.8.0.15
+set GOOGLE_TEST_VERSION=1.8.0.16
 set THIRDPARTY=.\..\thirdParty
 set WGET=%THIRDPARTY%\wget.exe
 set SEVENZ=%THIRDPARTY%\7za.exe
@@ -404,6 +404,10 @@ exit /b 0</Command>
   <ItemGroup>
     <ClInclude Include="CyclicListTest.h" />
     <ClInclude Include="ListTest.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\thirdParty\7za.exe" />
+    <None Include="..\thirdParty\wget.exe" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
